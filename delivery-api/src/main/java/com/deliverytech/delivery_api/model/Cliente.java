@@ -1,0 +1,48 @@
+package com.deliverytech.delivery_api.model;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.annotation.Generated;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
+
+/*----------------------------------------------- */
+
+
+@Getter
+@Setter
+@Entity
+@Table(name = "clientes")
+public class Cliente {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
+    private long id;
+    private String nome;
+
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    private String telefone;
+
+    private String endereco;
+
+    @Column(name = "data_cadastro")
+    private LocalDate dataCadastro;
+
+    private boolean ativo;
+
+
+    @OneToMany(mappedBy = "clientes")
+    private List<Pedido> pedidos = new ArrayList<>();
+}
