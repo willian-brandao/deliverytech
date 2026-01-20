@@ -10,6 +10,8 @@ import com.deliverytech.delivery_api.model.Restaurante;
 @Repository
 public interface RestauranteRepository extends JpaRepository<Restaurante, Long>{
     List<Restaurante> findByAtivoTrue();
-    List<Restaurante> findByCategory(String categoria);
-    List<Restaurante> findByAtivoTrueOrderByRatingDesc();
+    List<Restaurante> findByCategoria(String categoria);
+    List<Restaurante> findByAtivoTrueOrderByAvaliacaoDesc();
+    List<Restaurante> findByCategoriaAndAtivoTrue(String categoria);
+    List<Restaurante> findByNomeContainingIgnoreCase(String nome);
 }

@@ -26,7 +26,4 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long>{
         @Param("fim") LocalDateTime fim
     );
 
-    
-
-    
 } 
