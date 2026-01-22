@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.hibernate.annotations.Collate;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -49,8 +49,12 @@ public class Restaurante{
     private boolean ativo;
 
     @OneToMany(mappedBy = "restaurante", fetch = FetchType.LAZY)
+    
+    @JsonIgnore //linha adicionada para teste com o banco
     private List<Produto> produtos = new ArrayList<>();
 
     @OneToMany(mappedBy = "restaurante", fetch = FetchType.LAZY)
+    
+    @JsonIgnore //linha adicionada para teste com o banco
     private List<Pedido> pedidos = new ArrayList<>();
 }
