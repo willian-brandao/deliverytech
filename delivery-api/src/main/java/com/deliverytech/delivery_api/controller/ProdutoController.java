@@ -1,5 +1,7 @@
 package com.deliverytech.delivery_api.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,8 +24,15 @@ public class ProdutoController {
     }
 
     @PostMapping("/{restauranteId}")
-    public ResponseEntity<Produto> cadastrar(@PathVariable Restaurante restauranteId, @RequestBody Produto produto){
-        return ResponseEntity.status(201).body(service.cadastrar(produto));
+    public ResponseEntity<Produto> cadastrar(@PathVariable long restauranteId, @RequestBody Produto produto){
+        return ResponseEntity.status(201).body(produtoService.cadastrar(restauranteId, produto));
+    }
+
+    @PostMapping("/{restauranteId}")
+    public List<Produto> listarPorRestaurante(@PathVariable long restauranteId){
+        return produtoService.listarPorRestaurante(restauranteId);
     }
 }
+
+
 
