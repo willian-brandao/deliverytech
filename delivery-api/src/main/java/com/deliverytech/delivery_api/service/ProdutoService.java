@@ -39,6 +39,6 @@ public class ProdutoService {
 
     // crar o método de listar
     public List<Produto> listarPorRestaurante(Long restauranteId){
-        return produtoRepository.findByRestauranteIdAndDisponivel(restauranteId);
+        return produtoRepository.findByRestauranteIdAndDisponivelTrue(restauranteId);
     }
 }

@@ -7,7 +7,7 @@ import com.deliverytech.delivery_api.model.ItemPedido;
 
 public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Long> {
 
-    List<ItemPedido> findByPedido(Long pedidoId);
+    List<ItemPedido> findByPedidoId(Long pedidoId);
     List<ItemPedido> findByProdutoId(Long produtoId);
     
 }

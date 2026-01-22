@@ -6,8 +6,7 @@ import java.util.List;
 
 import org.hibernate.annotations.Collate;
 
-import com.fasterxml.jackson.databind.util.ArrayBuilders;
-import com.fasterxml.jackson.databind.util.ArrayBuilders.LongBuilder;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,7 +29,7 @@ public class Restaurante{
     
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private ArrayBuilders.LongBuilder id;
+    private long id;
 
     private String nome;
 
@@ -49,9 +48,9 @@ public class Restaurante{
 
     private boolean ativo;
 
-    @OneToMany(mappedBy = "restaurantes", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "restaurante", fetch = FetchType.LAZY)
     private List<Produto> produtos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "restaurantes", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "restaurante", fetch = FetchType.LAZY)
     private List<Pedido> pedidos = new ArrayList<>();
 }

@@ -32,7 +32,7 @@ public class ClienteController {
         return ResponseEntity.status(201).body(service.cadastrar(cliente));
    }
 
-   @GetMapping
+   @GetMapping("/listar")
    public List<Cliente> listar(){
         return service.listarAtivos();
    }

@@ -66,7 +66,7 @@ public class Pedido {
     private Restaurante restaurante;
 
 
-    @OneToMany(mappedBy = "pedidos")
+    @OneToMany(mappedBy = "pedido")
     private List<ItemPedido> itens = new ArrayList<>();
 
     
