@@ -9,6 +9,7 @@ import java.util.List;
 import org.hibernate.annotations.ManyToAny;
 
 import com.deliverytech.delivery_api.enums.StatusPedidos;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
@@ -65,8 +66,11 @@ public class Pedido {
     @JoinColumn(name = "restaurante_id")
     private Restaurante restaurante;
 
-
+   
     @OneToMany(mappedBy = "pedido")
+    
+    
+     @JsonIgnore //linha adicionada para teste com banco
     private List<ItemPedido> itens = new ArrayList<>();
 
     
