@@ -1,5 +1,6 @@
 package com.deliverytech.delivery_api.config;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Configurable;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.deliverytech.delivery_api.model.Cliente;
+import com.deliverytech.delivery_api.model.Produto;
 import com.deliverytech.delivery_api.model.Restaurante;
 import com.deliverytech.delivery_api.repository.ClienteRepository;
 import com.deliverytech.delivery_api.repository.PedidoRepository;
@@ -24,6 +26,7 @@ public class DataLoader {
         PedidoRepository pedidoRepository
     ){
         return args ->{
+
             System.out.println("Iniciando dados");
 
             Cliente cliente1 = new Cliente();
@@ -68,7 +71,26 @@ public class DataLoader {
             //salvando os objetos
             restauranteRepository.saveAll(Arrays.asList(restaurante_1, restaurante_2));
 
-        }
+
+            Produto produto1 = new Produto();
+            produto1.setNome("Porção de Camarão Empanado");
+            produto1.setDescricao("Deliciosa e generosa porção de camarão");
+            produto1.setPreco(new BigDecimal("35.00"));
+            produto1.setDisponivel(true);
+            produto1.setRestaurante(restaurante_1);
+
+
+            Produto produto2 = new Produto();
+            produto2.setNome("Pizza Marguerita");
+            produto2.setDescricao("Deliciosa pizza");
+            produto2.setPreco(new BigDecimal("45.00"));
+            produto2.setDisponivel(true);
+            produto2.setRestaurante(restaurante_2);
+
+            produtoRepository.saveAll(Arrays.asList(produto1, produto2));
+
+        
+        };
     }
 
 }
