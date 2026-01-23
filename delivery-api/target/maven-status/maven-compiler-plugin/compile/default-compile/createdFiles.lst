@@ -4,6 +4,7 @@ com/deliverytech/delivery_api/service/ProdutoService.class
 com/deliverytech/delivery_api/service/PedidoService.class
 com/deliverytech/delivery_api/service/ClienteService.class
 com/deliverytech/delivery_api/repository/ClienteRepository.class
+com/deliverytech/delivery_api/controller/PedidoController.class
 com/deliverytech/delivery_api/controller/RestauranteController.class
 com/deliverytech/delivery_api/repository/RestauranteRepository.class
 com/deliverytech/delivery_api/repository/ItemPedidoRepository.class

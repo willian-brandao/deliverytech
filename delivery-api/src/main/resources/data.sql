@@ -31,7 +31,7 @@ INSERT INTO pedidos (id, numero_pedido, data_pedido, status, valor_total, observ
 (3, 'PED1234567892', CURRENT_TIMESTAMP, 'ENTREGUE', 78.80, 'Wasabi à parte', 3, 3);
  
  
-INSERT INTO itens_pedido (quantidade, preco_unitario, subtotal, pedido_id, produto_id) VALUES
+INSERT INTO item_pedidos (quantidade, preco_unitario, subtotal, pedido_id, produto_id) VALUES
 (1, 35.90, 35.90, 1, 1),
 (1, 28.90, 28.90, 1, 3),
  

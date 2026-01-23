@@ -1,19 +1,20 @@
 package com.deliverytech.delivery_api.model;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.annotation.Generated;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -51,4 +52,10 @@ public class Cliente {
     @OneToMany(mappedBy="cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
+    // vai gerar uma data toda vez que o servidor for rodado e os dados foram persistidos no banco
+    @PrePersist
+    public void PrePersist(){
+        this.dataCadastro = LocalDateTime.now();
+
+    }
 }

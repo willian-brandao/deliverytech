@@ -28,7 +28,7 @@ public class ProdutoController {
         return ResponseEntity.status(201).body(produtoService.cadastrar(restauranteId, produto));
     }
 
-    @PostMapping("/{restauranteId}")
+    @PostMapping("/restaurante/{restauranteId}")
     public List<Produto> listarPorRestaurante(@PathVariable long restauranteId){
         return produtoService.listarPorRestaurante(restauranteId);
     }

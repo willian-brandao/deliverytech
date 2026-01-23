@@ -1,6 +1,7 @@
 /home/willian/Documentos/deliverytech/delivery-api/src/main/java/com/deliverytech/delivery_api/DeliveryApiApplication.java
 /home/willian/Documentos/deliverytech/delivery-api/src/main/java/com/deliverytech/delivery_api/controller/ClienteController.java
 /home/willian/Documentos/deliverytech/delivery-api/src/main/java/com/deliverytech/delivery_api/controller/HealthController.java
+/home/willian/Documentos/deliverytech/delivery-api/src/main/java/com/deliverytech/delivery_api/controller/PedidoController.java
 /home/willian/Documentos/deliverytech/delivery-api/src/main/java/com/deliverytech/delivery_api/controller/ProdutoController.java
 /home/willian/Documentos/deliverytech/delivery-api/src/main/java/com/deliverytech/delivery_api/controller/RestauranteController.java
 /home/willian/Documentos/deliverytech/delivery-api/src/main/java/com/deliverytech/delivery_api/enums/StatusPedidos.java

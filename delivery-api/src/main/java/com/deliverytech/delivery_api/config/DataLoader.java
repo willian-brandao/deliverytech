@@ -1,17 +1,23 @@
 package com.deliverytech.delivery_api.config;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.deliverytech.delivery_api.enums.StatusPedidos;
 import com.deliverytech.delivery_api.model.Cliente;
+import com.deliverytech.delivery_api.model.ItemPedido;
+import com.deliverytech.delivery_api.model.Pedido;
 import com.deliverytech.delivery_api.model.Produto;
 import com.deliverytech.delivery_api.model.Restaurante;
 import com.deliverytech.delivery_api.repository.ClienteRepository;
+import com.deliverytech.delivery_api.repository.ItemPedidoRepository;
 import com.deliverytech.delivery_api.repository.PedidoRepository;
 import com.deliverytech.delivery_api.repository.ProdutoRepository;
 import com.deliverytech.delivery_api.repository.RestauranteRepository;
@@ -87,9 +93,50 @@ public class DataLoader {
             produto2.setDisponivel(true);
             produto2.setRestaurante(restaurante_2);
 
-            produtoRepository.saveAll(Arrays.asList(produto1, produto2));
+            
+            List<Produto> produtos = new ArrayList<>();
 
+            produtos.add(produto1);
+            produtos.add(produto2);
+
+            produtoRepository.saveAll(produtos);
+
+            
+            Pedido pedido1 = new Pedido();
+            pedido1.setCliente(cliente1);
+            pedido1.setRestaurante(restaurante_1);
+            pedido1.setStatus(StatusPedidos.PENDENTE);
+            pedido1.setEnderecoEntrega(cliente1.getEndereco());
+            pedido1.setValorTotal(BigDecimal.ZERO);
+
+
+            Pedido pedido2 = new Pedido();
+            pedido2.setCliente(cliente2);
+            pedido2.setRestaurante(restaurante_2);
+            pedido2.setStatus(StatusPedidos.PENDENTE);
+            pedido2.setEnderecoEntrega(cliente2.getEndereco());
+            pedido2.setValorTotal(BigDecimal.ZERO);
         
+            pedidoRepository.saveAll(Arrays.asList(pedido1, pedido2));
+
+            
+            ItemPedido item1 = new ItemPedido();
+            item1.setProduto(produto1);
+            item1.setPedido(pedido1);
+            item1.setQuantidade(2);
+            item1.setPrecoUnitario(produto1.getPreco());
+            item1.setSubtotal(produto1.getPreco().multiply(BigDecimal.valueOf((item1.getQuantidade()))));
+
+            ItemPedido item2 = new ItemPedido();
+            item2.setProduto(produto2);
+            item2.setPedido(pedido2);
+            item2.setQuantidade(5);
+            item2.setPrecoUnitario(produto2.getPreco());
+            item2.setSubtotal(produto1.getPreco().multiply(BigDecimal.valueOf((item2.getQuantidade()))));
+
+            ItemPedidoRepository.saveAll(Arrays.asList(item1, item2));
+
+            System.out.println("Dados carregados com sucesso");
         };
     }
 

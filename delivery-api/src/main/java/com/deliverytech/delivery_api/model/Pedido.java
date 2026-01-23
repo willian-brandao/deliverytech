@@ -12,6 +12,7 @@ import com.deliverytech.delivery_api.enums.StatusPedidos;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.annotation.Generated;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -23,6 +24,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -53,9 +55,12 @@ public class Pedido {
     @Column(name="valor_total")
     private BigDecimal valorTotal;
 
+    @Column(name="observacoes")
+    private String observacoes;
 
     @Enumerated(EnumType.STRING)
     private StatusPedidos status;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id")
@@ -67,11 +72,13 @@ public class Pedido {
     private Restaurante restaurante;
 
    
-    @OneToMany(mappedBy = "pedido")
-    
-    
-     @JsonIgnore //linha adicionada para teste com banco
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore //linha adicionada para teste com banco
     private List<ItemPedido> itens = new ArrayList<>();
 
-    
+    @PrePersist
+    public void PrePersist(){
+        this.dataPedido = LocalDateTime.now();
+    }
+
 }
