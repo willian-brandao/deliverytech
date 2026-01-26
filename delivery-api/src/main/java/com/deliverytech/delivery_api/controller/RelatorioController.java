@@ -19,7 +19,7 @@ public class RelatorioController {
     
     private final RelatorioService relatorioService;
 
-    @GetMapping("/total-vendas-por-restaurante")  
+    @GetMapping("/total-vendas-por-restaurante")
     public List<TotalDeVendasPorRestauranteDTO> totalDeVendasPorRestaurante(){
         return relatorioService.totalDeVendasPorRestaurante();
     }

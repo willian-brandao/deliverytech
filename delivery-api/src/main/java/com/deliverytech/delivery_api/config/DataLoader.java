@@ -29,7 +29,9 @@ public class DataLoader {
         ClienteRepository clienteRepository,
         RestauranteRepository restauranteRepository,
         ProdutoRepository produtoRepository,
-        PedidoRepository pedidoRepository
+        PedidoRepository pedidoRepository,
+        ItemPedidoRepository itemPedidoRepository
+
     ){
         return args ->{
 
@@ -74,14 +76,25 @@ public class DataLoader {
             restaurante_2.setTaxaEntrega(new java.math.BigDecimal("12.99"));
             restaurante_2.setAtivo(true);
 
+            Restaurante restaurante_3 = new Restaurante();
+            restaurante_3.setNome("Creperia Lábios Molhados");
+            restaurante_3.setCategoria("Creperia");
+            restaurante_3.setEndereco("Travessar do lugar, 45, Nova Friburgo, RJ");
+            restaurante_3.setTelefone("22 2323-5645");
+            restaurante_3.setAvaliacao(new java.math.BigDecimal("7.5"));
+            restaurante_3.setTaxaEntrega(new java.math.BigDecimal("13.99"));
+            restaurante_3.setAtivo(true);
+
+
             //salvando os objetos
-            restauranteRepository.saveAll(Arrays.asList(restaurante_1, restaurante_2));
+            restauranteRepository.saveAll(Arrays.asList(restaurante_1, restaurante_2, restaurante_3));
 
 
             Produto produto1 = new Produto();
             produto1.setNome("Porção de Camarão Empanado");
             produto1.setDescricao("Deliciosa e generosa porção de camarão");
             produto1.setPreco(new BigDecimal("35.00"));
+            produto1.setCategoria("frutos do mar");
             produto1.setDisponivel(true);
             produto1.setRestaurante(restaurante_1);
 
@@ -90,14 +103,44 @@ public class DataLoader {
             produto2.setNome("Pizza Marguerita");
             produto2.setDescricao("Deliciosa pizza");
             produto2.setPreco(new BigDecimal("45.00"));
+            produto2.setCategoria("pizza");
             produto2.setDisponivel(true);
             produto2.setRestaurante(restaurante_2);
+
+            Produto produto3 = new Produto();
+            produto3.setNome("Salgadsos Sortidos");
+            produto3.setDescricao("Porção de salgados");
+            produto3.setPreco(new BigDecimal("45.00"));
+            produto3.setCategoria("Salgados");
+            produto3.setDisponivel(true);
+            produto3.setRestaurante(restaurante_3);
+
+
+            Produto produto4 = new Produto();
+            produto4.setNome("Pizza Doce de Chocolate");
+            produto4.setDescricao("Deliciosa pizza");
+            produto4.setPreco(new BigDecimal("55.00"));
+            produto4.setCategoria("pizza");
+            produto4.setDisponivel(true);
+            produto4.setRestaurante(restaurante_2);
+
+
+            Produto produto5 = new Produto();
+            produto5.setNome("Crepe de Queijo e Presunto");
+            produto5.setDescricao("Delicioso crepe");
+            produto5.setPreco(new BigDecimal("32.00"));
+            produto5.setCategoria("crepe");
+            produto5.setDisponivel(true);
+            produto5.setRestaurante(restaurante_2);
 
             
             List<Produto> produtos = new ArrayList<>();
 
             produtos.add(produto1);
             produtos.add(produto2);
+            produtos.add(produto3);
+            produtos.add(produto4);
+            produtos.add(produto5);
 
             produtoRepository.saveAll(produtos);
 
@@ -108,6 +151,7 @@ public class DataLoader {
             pedido1.setStatus(StatusPedidos.PENDENTE);
             pedido1.setEnderecoEntrega(cliente1.getEndereco());
             pedido1.setValorTotal(BigDecimal.ZERO);
+            pedido1.setTaxaEntrega(restaurante_1.getTaxaEntrega());
 
 
             Pedido pedido2 = new Pedido();
@@ -116,8 +160,17 @@ public class DataLoader {
             pedido2.setStatus(StatusPedidos.PENDENTE);
             pedido2.setEnderecoEntrega(cliente2.getEndereco());
             pedido2.setValorTotal(BigDecimal.ZERO);
+            pedido2.setTaxaEntrega(restaurante_2.getTaxaEntrega());
+            
+            Pedido pedido3 = new Pedido();
+            pedido3.setCliente(cliente2);
+            pedido3.setRestaurante(restaurante_3);
+            pedido3.setStatus(StatusPedidos.PENDENTE);
+            pedido3.setEnderecoEntrega(cliente2.getEndereco());
+            pedido3.setValorTotal(BigDecimal.ZERO);
+            pedido3.setTaxaEntrega(restaurante_3.getTaxaEntrega()); 
         
-            pedidoRepository.saveAll(Arrays.asList(pedido1, pedido2));
+            pedidoRepository.saveAll(Arrays.asList(pedido1, pedido2, pedido3));
 
             
             ItemPedido item1 = new ItemPedido();
@@ -134,7 +187,7 @@ public class DataLoader {
             item2.setPrecoUnitario(produto2.getPreco());
             item2.setSubtotal(produto1.getPreco().multiply(BigDecimal.valueOf((item2.getQuantidade()))));
 
-            ItemPedidoRepository.saveAll(Arrays.asList(item1, item2));
+            itemPedidoRepository.saveAll(Arrays.asList(item1, item2));
 
             System.out.println("Dados carregados com sucesso");
         };

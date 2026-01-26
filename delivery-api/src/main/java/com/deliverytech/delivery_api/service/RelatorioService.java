@@ -15,8 +15,8 @@ public class RelatorioService {
     
     private final PedidoRepository pedidoRepository;
 
-    List<TotalDeVendasPorRestauranteDTO> totalDeVendasPorRestaurante(){
-        return pedidoRepository.totalDeVendasPorRestaurante();
+    public List<TotalDeVendasPorRestauranteDTO> totalDeVendasPorRestaurante(){
+        return pedidoRepository.totalDeVendasPorRestauranteDTO();
     }
 
 }

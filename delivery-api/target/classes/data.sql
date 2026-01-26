@@ -41,3 +41,15 @@ INSERT INTO item_pedidos (quantidade, preco_unitario, subtotal, pedido_id, produ
 (1, 45.90, 45.90, 3, 7),
 (1, 32.90, 32.90, 3, 8);
  
+
+ -------------------------------------- query de testes ---------------------------------
+
+// total de vendas por restaurantes
+
+select r.nome,
+COALESCE(SUM(ip.subtotal), 0) as total_vendas from restaurantes r
+join pedidos p ON p.restaurante_id = r.id
+join item_pedidos ip on ip.pedido_id = p.id
+group by r.nome;
+
+
