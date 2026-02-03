@@ -29,7 +29,7 @@ public class RestauranteController {
         return ResponseEntity.status(201).body(service.cadastrar(dados));
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public List<Restaurante> listar(){
         return service.listarRestauranteAtivos();
     }
@@ -37,6 +37,11 @@ public class RestauranteController {
     @GetMapping("/{id}")
     public Restaurante buscarPorId(@PathVariable Long id){
         return service.buscarPorId(id);
+    }
+
+    @GetMapping("categoria/{categoria}")
+    public List<Restaurante> buscarPorCategoria(@PathVariable String categoria){
+        return service.buscarPorRestaurantesPorCategoria(categoria);
     }
 
     @DeleteMapping("/{id}")
