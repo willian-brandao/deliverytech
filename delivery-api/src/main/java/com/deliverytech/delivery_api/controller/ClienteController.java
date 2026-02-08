@@ -65,36 +65,54 @@ public class ClienteController {
    @Operation(summary="Listar Clientes Ativos")
    @ApiResponses(
              value={
-               @ApiResponse
+               @ApiResponse(responseCode = "200", description = "Lista de clientes ativos retornado com sucesso."),
+               @ApiResponse(responseCode = "404", description = "Cliente não encontrado."),
              }
    )
+   
    @GetMapping("/listar")
    public List<ClienteResponseDTO> listar(){
         return service.listarAtivos();
    }
-   
+
+
+   @Operation(summary = "Buscar cliente por id.")
+   @ApiResponses(
+             value = {
+               @ApiResponse(responseCode = "200", description = "Cliente encontrado com sucesso."),
+               @ApiResponse(responseCode = "404", description = "Cliente não encontrado pelo id mencionado")
+             }
+   )
    @GetMapping("/{id}")
    public ClienteResponseDTO buscar(@PathVariable Long id){
         return service.buscarPorId(id);
    }
 
-
-
-   @PutMapping("/{id}/toggle")
-   public ResponseEntity<ClienteResponseDTO> toggleAtivo(@PathVariable long id){
-     return ResponseEntity.ok(service.toggleAtivo(id));
-   }
-
-}
-
-
+   
 /* 
    @PutMapping("/{id}")
    public Cliente atualizar(@PathVariable long id, @RequestBody Cliente novosDados){
         return service.atualizar(id, novosDados);
    }
+*/
 
 
+   @Operation(summary = "Ativar ou desativar cliente")
+   @ApiResponses(
+             value={
+               @ApiResponse(responseCode = "200", description = "Cliente encontrado com sucesso."),
+               @ApiResponse(responseCode = "404", description = "Cliente não encontrado pelo id mencionado")
+             }
+   )
+   @PutMapping("/{id}/toggle")
+   public ResponseEntity<ClienteResponseDTO> toggleAtivo(@PathVariable long id){
+     return ResponseEntity.ok(service.toggleAtivo(id));
+   }
+
+
+}
+
+/* 
 primeira versão, antes do DTO
 // o método invoca o repository salvar no banco de dados e caso seja bem sucedido, ele retorna o código de sucesso
    @PostMapping
